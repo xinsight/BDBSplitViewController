@@ -280,6 +280,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
         {
             self.detailViewShouldDim = NO;
             self.masterViewShouldDismissOnTap = NO;
+            [self showMasterViewControllerAnimated:animated completion:nil];
             break;
         }
 
