@@ -54,6 +54,9 @@ typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle)
 #pragma mark Customization
 - (void)setMasterViewDisplayStyle:(BDBMasterViewDisplayStyle)style animated:(BOOL)animated;
 
+#pragma mark removing splitview - need to cleanup KVO
+- (void) removeKVO;
+
 @end
 
 

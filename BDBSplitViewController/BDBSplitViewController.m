@@ -222,17 +222,22 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
         [self hideMasterViewControllerAnimated:YES completion:nil];
 }
 
+- (void) removeKVO;
+{
+    [self.detailViewController removeObserver:self forKeyPath:@"view.frame" context:kBDBSplitViewKVOContext];
+}
+
 #pragma mark UIViewController Overrides
 - (void)setViewControllers:(NSArray *)viewControllers
 {
     NSAssert(viewControllers && viewControllers.count == 2, @"viewControllers must contain a master and a detail view controller.");
 
     self.delegate = nil;
-    [self.detailViewController removeObserver:self forKeyPath:@"view.frame" context:kBDBSplitViewKVOContext];
+//    [self removeKVO];
 
     [super setViewControllers:viewControllers];
 
-    [self.detailViewController addObserver:self forKeyPath:@"view.frame" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:kBDBSplitViewKVOContext];
+//    [self.detailViewController addObserver:self forKeyPath:@"view.frame" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:kBDBSplitViewKVOContext];
 
     UIViewController *dvc = [(UINavigationController *)viewControllers[1] topViewController];
     if ([dvc isKindOfClass:[BDBDetailViewController class]])
